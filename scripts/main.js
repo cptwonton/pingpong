@@ -32,7 +32,7 @@ myButton.onclick = function() {
     setUserName();
 }
 
-setInterval("updateImage()", 3000);
+setInterval("updateImage()", 5000);
 
 function updateImage() {
 	var myImage = document.querySelector('img');
