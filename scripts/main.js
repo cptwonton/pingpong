@@ -1,7 +1,7 @@
 var myHeading = document.querySelector('h1');
 myHeading.textContent = 'Hello world!';
 
-var myImage = document.querySelector('img');
+/*var myImage = document.querySelector('img');
 
 myImage.onclick = function() {
     var mySrc = myImage.getAttribute('src');
@@ -10,7 +10,7 @@ myImage.onclick = function() {
     } else {
       myImage.setAttribute ('src','images/open-picture.png');
     }
-}
+}*/
 
 var myButton = document.querySelector('button');
 var myHeading = document.querySelector('h1');
@@ -30,4 +30,17 @@ if(!localStorage.getItem('name')) {
 
 myButton.onclick = function() {
     setUserName();
+}
+
+setInterval("updateImage()", 10000);
+
+function updateImage() {
+	var myImage = document.querySelector('img');
+	var myRequest = new Request('/images/cam.jpg');
+	fetch(myRequest)
+	.then(function(response) { return response.blob(); })
+	.then(function(myBlob) {
+		var objectURL = URL.createObjectURL(myBlob);
+		myImage.src = objectURL;
+	});
 }
