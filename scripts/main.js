@@ -36,9 +36,15 @@ setInterval("updateImage()", 10000);
 
 function updateImage() {
 	var myImage = document.querySelector('img');
+	var timeStamp = document.querySelector('#timestamp');
 	var myRequest = new Request('/images/cam.jpg');
+
 	fetch(myRequest)
-	.then(function(response) { return response.blob(); })
+	.then(function(response) {
+		var header = response.headers;
+		timeStamp.textContent = header.get('Last-Modified');
+		return response.blob(); 
+	})
 	.then(function(myBlob) {
 		var objectURL = URL.createObjectURL(myBlob);
 		myImage.src = objectURL;
